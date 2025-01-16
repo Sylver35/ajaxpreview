@@ -2,8 +2,8 @@
 /**
 *
 * @package		Breizh Ajax Preview Extension
-* @copyright	(c) 2019-2020 Sylver35  https://breizhcode.com
-* @license		http://opensource.org/licenses/gpl-license.php GNU Public License
+* @copyright	(c) 2019-2025 Sylver35  https://breizhcode.com
+* @license		https://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 

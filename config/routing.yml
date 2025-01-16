@@ -1,3 +1,18 @@
-sylver35_ajaxpreview_controller_ajax:
-    path: /ajaxpreview/ajax
+sylver35_ajaxpreview_message_ajax:
+    path: /ajaxpreview/ajax/{action}/{forum_id}
     defaults: { _controller: sylver35.ajaxpreview.controller.ajax:construct_ajax }
+    requirements:
+        action: \w+
+        forum_id: \d+
+
+sylver35_ajaxpreview_pm_ajax:
+    path: /ajaxpreview/ajax_pm/{action}
+    defaults: { _controller: sylver35.ajaxpreview.controller.ajax:construct_ajax }
+    requirements:
+        action: \w+
+
+sylver35_ajaxpreview_sign_ajax:
+    path: /ajaxpreview/ajax_sign/{action}
+    defaults: { _controller: sylver35.ajaxpreview.controller.ajax:construct_ajax }
+    requirements:
+        action: \w+

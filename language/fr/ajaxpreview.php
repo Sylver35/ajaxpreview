@@ -4,8 +4,8 @@
 * Breizh Ajax Preview Extension [French]
 *
 * @package language
-* @copyright (c) 2018-2020 Breizh Code  https://breizhcode.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @copyright (c) 2019-2025 Breizh Code  https://breizhcode.com
+* @license https://opensource.org/licenses/gpl-license.php GNU Public License
 * @translator Sylver35  https://breizhcode.com
 * 
 */

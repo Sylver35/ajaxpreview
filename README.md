@@ -1,4 +1,8 @@
-# phpBB Breizh Ajax Preview Extension
+# Breizh Ajax Preview Extension
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Sylver35/ajaxpreview/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Sylver35/ajaxpreview/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/Sylver35/ajaxpreview/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Sylver35/ajaxpreview/build-status/main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/Sylver35/ajaxpreview/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
 
 ## Install
 
@@ -18,3 +22,5 @@
 ## License
 
 [GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)
+
+© 2025 - Sylver35

@@ -2,19 +2,19 @@
 <script>
 var preview = {
 	timer:	false,
-	temps:	{{ REFRESH_TIME }},
+	time:	{{ REFRESH_TIME }},
 	url:	'{{ U_PREVIEW_AJAX }}',
 	prev:	'{{ lang("PREVIEW")|escape("js") }}{{ lang("COLON")|escape("js") }} ',
 	data:	'{{ PREVIEW_DATA }}',
 	sign:	{% if S_IN_SIGNATURE %}true{% else %}false{% endif %},
 };
-/** Start the preview on first focus **/
-function startPreview(){
+/** Start the preview on document loaded **/
+$(document).ready(function() {
 	preview.runAjax();
 	if(preview.timer === false){
-		preview.timer = setInterval(preview.runAjax, preview.temps);
+		preview.timer = setInterval(preview.runAjax, preview.time);
 	}
-}
+});
 (function($){  // Avoid conflicts with other libraries
 	'use strict';
 
@@ -34,18 +34,22 @@ function startPreview(){
 		});
 	}
 
-	/** Recover the items of the onfocus **/
-	var onFocus = $('#'+preview.data).attr('onfocus');
-	/** And add them to the new item **/
-	$('#'+preview.data).attr('onfocus', onFocus+'startPreview();');
 	/** Run and Refresh the preview  **/
 	preview.runAjax = function(){
 		if($('#'+preview.data).val() !== ''){
+			var $contentData = 'content='+encodeURIComponent($('#'+preview.data).val());
+			if(preview.sign === false){
+				var $plupload = preview.getPluploadData();
+				if($plupload !== ''){
+					$contentData += $plupload+'&total='+phpbb.plupload.data.length;
+				}
+				
+			}
 			$.ajax({
 				type: 'POST',
 				dataType: 'json',
 				url: preview.url,
-				data: 'content='+encodeURIComponent($('#'+preview.data).val()),
+				data: $contentData,
 				async: true,
 				success: function(update){
 					$('#ajax-preview').html(update.content);
@@ -57,16 +61,32 @@ function startPreview(){
 				},
 				error: function(){
 					clearInterval(preview.timer);
-					preview.timer = setInterval(preview.runAjax, preview.temps);
+					preview.timer = setInterval(preview.runAjax, preview.time);
 				}
 			});
 		}else{
 			$('#ajax-preview').html('');
-			if($('#subject').val() === ''){
+			if ($('#subject').val() === ''){
 				$('#h3-subject').html('');
 			}
 		}
 	};
+
+	/** Get attachements files in data plupload array **/
+	preview.getPluploadData = function(){
+		var $plupload = phpbb.plupload.data, $data = '';
+		if($plupload !== ''){
+			for(var i = 0; i < $plupload.length; i++){
+				$data += '&plupload-'+i+'=';
+				$data += $plupload[i]["attach_id"];
+				$data += ','+$plupload[i]["is_orphan"];
+				$data += ','+$plupload[i]["attach_comment"];
+				$data += ','+$plupload[i]["real_filename"];
+				$data += ','+$plupload[i]["filesize"];
+			}
+		}
+		return $data;
+	}
 })(jQuery);
 </script>
 {% endif %}

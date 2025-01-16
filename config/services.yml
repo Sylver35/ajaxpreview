@@ -13,3 +13,6 @@ services:
         class: sylver35\ajaxpreview\controller\ajax
         arguments:
             - '@request'
+
+    _defaults:
+        public: true
