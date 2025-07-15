@@ -1,5 +1,6 @@
 {% if S_SHOW_AJAX_PREVIEW %}
 <script>
+/** Initialise the preview config **/
 var preview = {
 	timer:	false,
 	time:	{{ REFRESH_TIME }},
@@ -39,12 +40,11 @@ $(document).ready(function() {
 		if($('#'+preview.data).val() !== ''){
 			var $contentData = 'content='+encodeURIComponent($('#'+preview.data).val());
 			$contentData += (!preview.sign && $('#subject').val() !== '') ? '&subject='+encodeURIComponent($('#subject').val()) : '';
-			if(preview.sign === false){
+			if(!preview.sign){
 				var $plupload = preview.getPluploadData();
 				if($plupload !== ''){
 					$contentData += $plupload+'&total='+phpbb.plupload.data.length;
 				}
-				
 			}
 			try{
 				const response = await $.ajax({
@@ -66,6 +66,7 @@ $(document).ready(function() {
 		}
 	};
 
+	/** Refresh the Dom now **/
 	preview.handleSuccess = function(response){
 		$('#ajax-preview').html(response.content);
 		if(!preview.sign){
@@ -73,7 +74,7 @@ $(document).ready(function() {
 		}
 	}
 
-	/** Get attachements files in data plupload array **/
+	/** Get attachements files in the data plupload array **/
 	preview.getPluploadData = function(){
 		var $plupload = phpbb.plupload.data, $data = '';
 		if($plupload !== ''){

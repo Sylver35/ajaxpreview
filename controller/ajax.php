@@ -46,6 +46,7 @@ class ajax
 		generate_text_for_storage($message, $uid, $bitfield, $options, true, false, true);
 		$message = generate_text_for_display($message, $uid, $bitfield, 1 | 2, false);
 
+		// In message form, subject and attachements job
 		if ($action === 'message')
 		{
 			$this->language->add_lang('posting');
