@@ -39,11 +39,13 @@ $(document).ready(function() {
 	preview.runAjax = async function(){
 		if($('#'+preview.data).val() !== ''){
 			var $contentData = 'content='+encodeURIComponent($('#'+preview.data).val());
-			$contentData += (!preview.sign && $('#subject').val() !== '') ? '&subject='+encodeURIComponent($('#subject').val()) : '';
 			if(!preview.sign){
+				$contentData += ($('#subject').val() !== '') ? '&subject='+encodeURIComponent($('#subject').val()) : '';
 				var $plupload = preview.getPluploadData();
 				if($plupload !== ''){
-					$contentData += $plupload+'&total='+phpbb.plupload.data.length;
+					$contentData += $plupload;
+				}else{
+					$contentData += '&attach=0';
 				}
 			}
 			try{
@@ -77,7 +79,8 @@ $(document).ready(function() {
 	/** Get attachements files in the data plupload array **/
 	preview.getPluploadData = function(){
 		var $plupload = phpbb.plupload.data, $data = '';
-		if($plupload !== ''){
+		if($plupload.length){
+			$data += '&attach=1';
 			for(var i = 0; i < $plupload.length; i++){
 				$data += '&plupload-'+i+'=';
 				$data += $plupload[i]["attach_id"];
@@ -86,6 +89,7 @@ $(document).ready(function() {
 				$data += ','+$plupload[i]["real_filename"];
 				$data += ','+$plupload[i]["filesize"];
 			}
+			$data += '&total='+$plupload.length;
 		}
 		return $data;
 	}
