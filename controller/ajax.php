@@ -76,12 +76,10 @@ class ajax
 			$subject = generate_text_for_display($subject, $uid, $bitfield, 1 | 2, false);
 		}
 
-		$message = $this->replace_text($message);
-
 		// Send the preview to the browser now
 		$json_response = new \phpbb\json_response;
 		$json_response->send([
-			'content'		=> $message,
+			'content'		=> $this->replace_text($message),
 			'subject'		=> $subject,
 		]);
 	}

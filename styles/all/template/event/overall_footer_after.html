@@ -5,7 +5,7 @@ var preview = {
 	timer:	false,
 	time:	{{ REFRESH_TIME }},
 	url:	'{{ U_PREVIEW_AJAX }}',
-	prev:	'{{ lang("PREVIEW")|escape("js") }}{{ lang("COLON")|escape("js") }} ',
+	prev:	'{{ lang_js("PREVIEW") }}{{ lang_js("COLON") }} ',
 	data:	'{{ PREVIEW_DATA }}',
 	sign:	{% if S_IN_SIGNATURE %}true{% else %}false{% endif %},
 };
@@ -26,7 +26,7 @@ $(document).ready(function() {
 		$('#preview').addClass('panel');
 		$('div.postbody > h3').first().attr('id', 'h3-subject');
 		$('div.content').first().attr('id', 'ajax-preview');
-		$('#ajax-preview').css({'overflow':'hidden auto', 'max-height':'260px'});
+		$('#ajax-preview').css({'overflow':'hidden auto', 'max-height':'600px'});
 		$('#message').on('scroll', function(){
 			$('#ajax-preview').scrollTop($(this).scrollTop());
 		});
